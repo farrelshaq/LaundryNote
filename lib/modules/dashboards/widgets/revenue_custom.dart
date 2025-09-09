@@ -20,7 +20,7 @@ class RevenueCard extends StatelessWidget {
                Text(
                 "Pendapatan Hari Ini",
                 style: TextStyle(
-                  color: Colors.black54,
+                  color: Colors.black,
                   fontSize: 16,
                 ),
               ),

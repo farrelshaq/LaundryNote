@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:laundrynote/modules/dashboards/controllers/dashboard_controller.dart';
 import 'package:laundrynote/modules/dashboards/widgets/revenue_custom.dart';
-import 'package:laundrynote/modules/laporan/pages/laporan_page.dart';
 import 'package:laundrynote/modules/pelanggan/pages/pelanggan_page.dart';
+import 'package:laundrynote/modules/laporan/pages/laporan_page.dart';
 import 'package:laundrynote/modules/profile/pages/profile_page.dart';
-import '../controllers/dashboard_controller.dart';
 
 class DashboardPage extends StatelessWidget {
   const DashboardPage({super.key});
@@ -14,9 +14,9 @@ class DashboardPage extends StatelessWidget {
     final controller = Get.find<DashboardController>();
 
     final pages = [
-      _buildHomePage(context), // ⬅️ kirim context
+      _buildHomePage(context), // Beranda
       const LaporanPage(),
-      PelangganPage(),
+      const PelangganPage(),
       const ProfilePage(),
     ];
 
@@ -67,16 +67,21 @@ class DashboardPage extends StatelessWidget {
           const SizedBox(height: 20),
 
           // Tombol Order Baru
-          ElevatedButton(
+          SizedBox(
+            width: double.infinity, // biar full lebar
+            height: 50,
+
+            child: FloatingActionButton(
             onPressed: () => _showOrderBaruDialog(context),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color.fromARGB(255, 58, 163, 255),
-              padding: const EdgeInsets.symmetric(vertical: 16),
-            ),
-            child: const Center(
-              child: Text("Order Baru", style: TextStyle(fontSize: 16)),
-            ),
-          ),
+            backgroundColor: const Color.fromARGB(255, 87, 177, 255),
+            shape: RoundedRectangleBorder(
+
+            borderRadius: BorderRadius.circular(12), // biar kotak agak rounded
+    ),
+
+    child: const Text("Order Baru", style: TextStyle(fontSize: 16)),
+  ),
+),
           const SizedBox(height: 10),
 
           // Tombol Lihat Pelanggan
@@ -89,7 +94,7 @@ class DashboardPage extends StatelessWidget {
           ),
           const SizedBox(height: 20),
 
-          // Order terbaru
+          // Order terbaru (sementara dummy)
           const Text(
             "Order Terbaru",
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -129,82 +134,86 @@ class DashboardPage extends StatelessWidget {
               // Isi Form
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 48, 16, 16),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      "Order Baru",
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(height: 12),
-
-                    const Text("Nama Pelanggan *"),
-                    TextField(
-                      decoration: InputDecoration(
-                        hintText: "Masukkan nama pelanggan",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        "Order Baru",
+                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                       ),
-                    ),
+                      const SizedBox(height: 12),
 
-                    const Text("No. Telepon *"),
-                    TextField(
-                      decoration: InputDecoration(
-                        hintText: "Masukkan nomor telepon",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 12),
-
-                    const Text("Jenis Layanan *"),
-                    DropdownButtonFormField<String>(
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
-                      items: const [
-                        DropdownMenuItem(value: "Cuci Kering", child: Text("Cuci Kering")),
-                        DropdownMenuItem(value: "Cuci Setrika", child: Text("Cuci Setrika")),
-                        DropdownMenuItem(value: "Express", child: Text("Express")),
-                      ],
-                      onChanged: (_) {},
-                    ),
-                    const SizedBox(height: 20),
-
-                    const Text("Harga"),
-                    TextField(
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
-                        hintText: "0",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-
-                    SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.of(ctx).pop();
-                        },
-                        style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(vertical: 14),
-                          backgroundColor: Colors.deepPurple,
-                          shape: RoundedRectangleBorder(
+                      const Text("Nama Pelanggan *"),
+                      TextField(
+                        decoration: InputDecoration(
+                          hintText: "Masukkan nama pelanggan",
+                          border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),
                         ),
-                        child: const Text("Simpan Order", style: TextStyle(color: Colors.white)),
                       ),
-                    ),
-                  ],
+                      const SizedBox(height: 12),
+
+                      const Text("No. Telepon *"),
+                      TextField(
+                        decoration: InputDecoration(
+                          hintText: "Masukkan nomor telepon",
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+
+                      const Text("Jenis Layanan *"),
+                      DropdownButtonFormField<String>(
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                        items: const [
+                          DropdownMenuItem(value: "Cuci Kering", child: Text("Cuci Kering")),
+                          DropdownMenuItem(value: "Cuci Setrika", child: Text("Cuci Setrika")),
+                          DropdownMenuItem(value: "Express", child: Text("Express")),
+                        ],
+                        onChanged: (_) {},
+                      ),
+                      const SizedBox(height: 20),
+
+                      const Text("Harga"),
+                      TextField(
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                          hintText: "0",
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+
+                      SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.of(ctx).pop(); // Tutup dialog
+                            // Nanti di sini kita panggil DashboardController -> simpan order ke Supabase
+                          },
+                          style: ElevatedButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(vertical: 14),
+                            backgroundColor: Colors.deepPurple,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                          child: const Text("Simpan Order", style: TextStyle(color: Colors.white)),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
 
