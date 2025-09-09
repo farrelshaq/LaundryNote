@@ -15,7 +15,4 @@ class LaporanController extends GetxController {
 
   final labaMingguIni = '80.000'.obs;
 
-  void tambahPendapatan() {
-    print('Tombol Tambah Pendapatan ditekan');
-  }
 }

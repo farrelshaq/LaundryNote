@@ -20,30 +20,6 @@ class LaporanPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
-              decoration: BoxDecoration(
-                color: Colors.purple.shade50,
-                borderRadius: BorderRadius.circular(12.0),
-              ),
-              child: InkWell(
-                onTap: controller.tambahPendapatan,
-                child: const Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children:[
-                    Icon(Icons.add, color: Colors.deepPurple),
-                    SizedBox(width: 8.0),
-                    Text(
-                      "Tambahkan Pendapatan Hari Ini",
-                      style: TextStyle(color: Colors.deepPurple, fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            const SizedBox(height: 24.0),
-
             Row(
               children: [
                 Expanded(
