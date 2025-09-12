@@ -1,10 +1,10 @@
 import 'package:get/get.dart';
 import '../services/dashboard_service.dart';
+import '../models/order_model.dart';
 
 class DashboardController extends GetxController {
   var currentIndex = 0.obs;
-
-  var orderTerbaru = <Map<String, dynamic>>[].obs;
+  var orderTerbaru = <Order>[].obs;
 
   final _service = DashboardService();
 
@@ -20,7 +20,7 @@ class DashboardController extends GetxController {
 
   Future<void> fetchOrders() async {
     final result = await _service.getOrdersToday();
-    orderTerbaru.assignAll(result);
+    orderTerbaru.assignAll(result as Iterable<Order>);
   }
 
   Future<void> addOrder({
@@ -28,13 +28,15 @@ class DashboardController extends GetxController {
     required String telepon,
     required String layanan,
     required int harga,
+    required double berat,
   }) async {
     await _service.insertOrder(
       nama: nama,
       telepon: telepon,
       layanan: layanan,
       harga: harga,
+      berat: berat,
     );
-    await fetchOrders(); // Refresh the list after adding a new order
+    await fetchOrders();
   }
 }
